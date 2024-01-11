@@ -17,5 +17,7 @@ namespace IRepository
         Task<bool> DeleteAsync(int idToDelete);
 
         Task<int> AddAsync(Article article);
+
+        Task<bool> CheckUniqTheme(string theme);
     }
 }

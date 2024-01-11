@@ -14,7 +14,7 @@ namespace Entities
         public int Id { get; set; }
 
         [StringLength(50, ErrorMessage = "La taille du nom doit être de maximum 50 caractère !")]
-        [Remote("CheckUniq", "ArticleController", ErrorMessage ="Un article du même thème a déjà été crée !")]
+        [Remote("CheckUniqTheme", "Article", ErrorMessage ="Un article du même thème a déjà été crée !")]
         public string Theme { get; set; }
 
         [Required]
@@ -29,6 +29,6 @@ namespace Entities
 
         public string Contenu {  get; set; }
 
-        public List<Commentaire> Commentaires { get; set; }
+        public List<Commentaire>? Commentaires { get; set; }
     }
 }

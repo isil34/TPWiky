@@ -92,5 +92,13 @@ namespace TPWiky.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult CheckUniqTheme(string Theme)
+        {
+            bool res =  _articleRepository.CheckUniqTheme(Theme).Result;
+            return Json (res);
+
+        }
+
+        
     }
 }

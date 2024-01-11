@@ -70,5 +70,22 @@ namespace Repository
         {
             return _context.Articles.ToList();
         }
+
+        public async Task<bool> CheckUniqTheme(string theme)
+        {
+            bool ok;
+            try
+            {
+                _context.Articles.Any(a => a.Theme == theme);
+                await _context.SaveChangesAsync();
+                ok = true;
+            }
+            catch (Exception ex)
+            {
+                ok = false;
+            }
+            return ok;
+        }
+
     }
 }
