@@ -1,0 +1,79 @@
+﻿@model Article
+
+<fieldset>
+    <p>Vu Partielle detail de l'article'</p>
+
+    <table class="table table-striped table-sm table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Auteur</th>
+                <th>Thème</th>
+                <th>Contenu</th>
+                <th>Date de création</th>
+                <th>Date de Modification</th>
+                <th>Commentaire(s)</th>
+            </tr>
+        </thead>
+        <tbody id="contentArticle">
+
+            <tr>
+                <td>
+                    @Model.Id
+                </td>
+                <td>
+                    @Model.Auteur
+                </td>
+                <td>
+                    @Model.Theme
+                </td>
+                <td>
+                    @Model.Contenu
+                </td>
+                <td>
+                    @Model.DateCreation
+                </td>
+                <td>
+                    @Model.DateModification
+                </td>
+                <td>
+                    @if (Model.Commentaires != null && Model.Commentaires.Any())
+                    {
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Auteur</th>
+                                    <th>Contenu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var commentaire in Model.Commentaires)
+                                {
+                                    <tr>
+                                        <td>@commentaire.Id</td>
+                                        <td>@commentaire.Auteur</td>
+                                        <td>@commentaire.Contenu</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Pas de commentaires pour cet article.</p>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-idToEdit="@Model.Id">Modifier</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-idToDelete="@Model.Id" onclick="return confirm('Sur ???');">Supprimer</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</fieldset>

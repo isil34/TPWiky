@@ -23,7 +23,7 @@ namespace TPWiky.Controllers
         }
 
         // GET: ArticleController/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Detail(int id)
         {
             // ToDo Redirect to perso 404
             return View(_articleRepository.Detail(id));

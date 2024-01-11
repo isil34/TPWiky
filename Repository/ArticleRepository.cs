@@ -1,6 +1,7 @@
 ﻿using Entities;
 using IRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace Repository
 
         public Article Detail(int id)
         {
-            return _context.Articles.FirstOrDefault(a => a.Id == id);
+            return _context.Articles.Include(c => c.Commentaires).FirstOrDefault(a => a.Id == id);
         }
 
         public async Task<bool> EditAsync(Article article)
@@ -68,7 +69,8 @@ namespace Repository
 
         public List<Article> GetAllArticle()
         {
-            return _context.Articles.ToList();
+            var maliste = _context.Articles.Include(c => c.Commentaires).ToList();
+            return maliste;
         }
 
         public async Task<bool> CheckUniqTheme(string theme)
