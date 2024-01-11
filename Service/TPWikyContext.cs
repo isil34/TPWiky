@@ -23,9 +23,9 @@ namespace Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var g = new Article() { Id = 1, Contenu = "Message 1", Theme = "Roadster", DateCreation = DateOnly.Parse("04/01/2024"), 
-                                    DateModification = DateOnly.Parse("04/01/2024"), Auteur="Yoann" };
+                                    DateModification = DateOnly.Parse("04/01/2024"), Auteur="Yoann", Commentaires=new List<Commentaire>() };
             var c1 = new Commentaire() { Auteur="Yoann", Contenu="Les roadsters c'est bien mais ça prend le vent !", 
-                                        DateCreation = DateOnly.Parse("04/01/2024"), DateModification = DateOnly.Parse("04/01/2024"), Id=1 , Article=g, ArticleID=g.Id};
+                                        DateCreation = DateOnly.Parse("04/01/2024"), DateModification = DateOnly.Parse("04/01/2024"), Id=1 , ArticleId=g.Id};
             var L1 = new List<Commentaire>();
             L1.Add(c1);
 

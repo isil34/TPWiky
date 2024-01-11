@@ -29,7 +29,7 @@ namespace Entities
         public string Contenu { get; set; }
 
         [ForeignKey("Article")]
-        public int ArticleID { get; set; }
+        public int ArticleId { get; set; }
         public virtual Article Article { get; set; }
 
     }
