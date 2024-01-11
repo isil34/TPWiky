@@ -1,6 +1,6 @@
 ﻿using Entities;
 using IRepository;
-using Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,29 +16,61 @@ namespace Repository
         {
             _context = context;
         }
-        public void Add(Article article)
+
+        //optionnel (implicite) 
+        //[HttpGet]
+        public async Task<int> AddAsync(Article article)
         {
-            throw new NotImplementedException();
+            article.DateModification = DateOnly.FromDateTime(DateTime.Now);
+            article.DateCreation = DateOnly.FromDateTime(DateTime.Now);
+            _context.Articles.Add(article);
+            return await _context.SaveChangesAsync();
         }
 
-        public bool Delete(int idToDelete)
+        public async Task<bool> DeleteAsync(int idToDelete)
         {
-            throw new NotImplementedException();
+            bool ok;
+            try
+            {
+                _context.Articles.Remove(_context.Articles.FirstOrDefault(a => a.Id == idToDelete));
+                await _context.SaveChangesAsync();
+                ok = true;
+            }
+            catch (Exception ex)
+            {
+                ok = false;
+            }
+            return ok;
         }
 
         public Article Detail(int id)
         {
-            throw new NotImplementedException();
+            return _context.Articles.FirstOrDefault(a => a.Id == id);
         }
 
-        public bool Edit(Article article)
+        public async Task<bool> EditAsync(Article article)
         {
-            throw new NotImplementedException();
+            bool ok;
+            try
+            {
+                var ArticleToEdit = _context.Articles.FirstOrDefault(c => c.Id == article.Id);
+                ArticleToEdit.Auteur = article.Auteur;
+                ArticleToEdit.Contenu = article.Contenu;
+                ArticleToEdit.DateModification = DateOnly.FromDateTime(DateTime.Now); ;
+                _context.SaveChanges();
+                ok = true;
+            }
+            catch (Exception ex)
+            {
+                ok = false;
+
+            }
+            return ok;
         }
 
-        public List<Article> GetAllMessage()
+        public List<Article> GetAllArticle()
         {
-            throw new NotImplementedException();
+            return _context.Articles.ToList();
         }
     }
 }

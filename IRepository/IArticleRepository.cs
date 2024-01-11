@@ -9,13 +9,13 @@ namespace IRepository
 {
     public interface IArticleRepository
     {
-        List<Article> GetAllMessage();
+        List<Article> GetAllArticle();
         Article Detail(int id);
 
-        bool Edit(Article article);
+        Task<bool> EditAsync(Article article);
 
-        bool Delete(int idToDelete);
+        Task<bool> DeleteAsync(int idToDelete);
 
-        void Add(Article article);
+        Task<int> AddAsync(Article article);
     }
 }
