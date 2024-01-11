@@ -10,7 +10,7 @@ using Services;
 
 namespace Services.Migrations
 {
-    [DbContext(typeof(TPWikyContext))]
+    [DbContext(typeof(TPWikyContextModelSnapshot))]
     partial class TPWikyContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

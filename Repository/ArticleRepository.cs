@@ -17,8 +17,6 @@ namespace Repository
             _context = context;
         }
 
-        //optionnel (implicite) 
-        //[HttpGet]
         public async Task<int> AddAsync(Article article)
         {
             article.DateModification = DateOnly.FromDateTime(DateTime.Now);

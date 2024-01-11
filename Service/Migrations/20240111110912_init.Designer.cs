@@ -11,7 +11,7 @@ using Services;
 
 namespace Services.Migrations
 {
-    [DbContext(typeof(TPWikyContext))]
+    [DbContext(typeof(TPWikyContextModelSnapshot))]
     [Migration("20240111110912_init")]
     partial class init
     {
