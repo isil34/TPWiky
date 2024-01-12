@@ -44,5 +44,10 @@ namespace Repository
         {
             return _context.Commentaires.FirstOrDefault(a => a.Id == id);
         }
+
+        public async Task<List<Commentaire>> GetAllByArticleIdAsync(int articleId)
+        {
+            return await _context.Commentaires.Where(c => c.ArticleId == articleId).ToListAsync();
+        }
     }
 }

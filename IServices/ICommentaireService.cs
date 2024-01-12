@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IRepository
+namespace IServices
 {
-    public interface ICommentaireRepository
+    public interface ICommentaireService
     {
         Commentaire Detail(int id);
 

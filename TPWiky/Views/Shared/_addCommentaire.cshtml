@@ -1,0 +1,17 @@
+﻿@model Commentaire 
+
+<form asp-action="Add" asp-controller="Commentaire">
+    <input asp-for="ArticleId" type="hidden" />
+    <label>Nom de l'auteur :</label>
+    <br />
+    <input asp-for="Auteur">
+    <span asp-validation-for="Auteur" class="text-danger"></span>
+    <br />
+    <label>Contenu :</label>
+    <br />
+    <input asp-for="Contenu">
+    <span asp-validation-for="Contenu"></span>
+    <br />
+
+    <button class="btn btn-primary">Ajouter</button>
+</form>

@@ -47,22 +47,20 @@ namespace Repository
 
         public async Task<bool> EditAsync(Article article)
         {
-            bool ok;
             try
             {
                 var ArticleToEdit = _context.Articles.FirstOrDefault(c => c.Id == article.Id);
                 ArticleToEdit.Auteur = article.Auteur;
                 ArticleToEdit.Contenu = article.Contenu;
-                ArticleToEdit.DateModification = article.DateModification; 
+                ArticleToEdit.DateModification = article.DateModification;
                 _context.SaveChanges();
-                ok = true;
+                return true;
             }
             catch (Exception ex)
             {
-                ok = false;
+                return false;
 
             }
-            return ok;
         }
 
         public List<Article> GetAllArticle()
@@ -76,7 +74,7 @@ namespace Repository
             bool ok;
             try
             {
-                ok= _context.Articles.Any(a => a.Theme == theme);
+                ok = _context.Articles.Any(a => a.Theme == theme);
             }
             catch (Exception ex)
             {
@@ -85,5 +83,17 @@ namespace Repository
             return ok;
         }
 
+        public async Task<List<Article>> SearchAjax(string auteur)
+        {
+            return await _context.Articles
+                    .Where(a => a.Auteur.Contains(auteur) || a.Theme.Contains(auteur) || a.Contenu.Contains(auteur) || a.Commentaires.Any(c => c.Auteur.Contains(auteur) || c.Contenu.Contains(auteur)))
+                    .Include(a => a.Commentaires)
+                    .ToListAsync();
+        }
+
+        public async Task<Article> GetLastArticleAsync()
+        {
+            return await _context.Articles.OrderByDescending(a => a.DateModification).FirstOrDefaultAsync();
+        }
     }
 }

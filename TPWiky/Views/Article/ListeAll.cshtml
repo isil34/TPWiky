@@ -1,0 +1,52 @@
+﻿@model List<Article>
+
+<h1>Articles :</h1>
+
+<div>
+
+    <form asp-action="Search" id="formSearch">
+        <input name="name" id="searchAuteur" placeholder="Auteur..." />
+        <button>Rechercher</button>
+    </form>
+</div>
+<div id="divContentArticles">
+    <partial name="_displayArticles" model="Model" />
+</div>
+
+<a type="button" class="btn btn-primary" asp-action="Add">Créer un nouvel article</a>
+
+<script>
+
+
+    $(function () {
+        $('#formSearch').keyup(function (e) {
+            if ($('#searchAuteur').val() == "") {
+                refreshArticle();
+            } else {
+                $.post('/Article/SearchAjax', { auteur: $('#searchAuteur').val() }, function (data) {
+                    $('#divContentArticles').html(data);
+                });
+            }
+
+
+            e.preventDefault();
+        });
+
+    });
+
+    function refreshArticle() {
+        $.get("/Article/GetAllJson", function (data) {
+            // console.log(data);
+
+            // var content = $('#contentPets');
+
+            // content.empty();
+
+            // for (let pet of data) {
+            //     content.append($('<tr><td>' + pet.name + '</td></tr>'));
+            // }
+
+            $('#divContentArticles').html(data);
+        });
+    }
+</script>

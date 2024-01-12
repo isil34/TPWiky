@@ -9,6 +9,7 @@
 
 
     <form asp-action="Add">
+        <input asp-for="ArticleId" value="@ViewBag.ArticleId" type="hidden" />
         <label>Nom de l'auteur :</label>
         <input asp-for="Auteur">
         <span asp-validation-for="Auteur" class="text-danger"></span>

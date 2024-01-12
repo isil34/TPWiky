@@ -1,6 +1,7 @@
 ﻿using Entities;
 using IRepository;
 using IServices;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace Services
         {
             _articleRepository = articleRepository;
         }
-        public Task<int> AddAsync(Article article)
+        public async Task<int> AddAsync(Article article)
         {
             article.DateCreation = DateOnly.FromDateTime(DateTime.Now);
             article.DateModification = DateOnly.FromDateTime(DateTime.Now);
-            return _articleRepository.AddAsync(article);
+            return await _articleRepository.AddAsync(article);
         }
 
         public Task<bool> CheckUniqTheme(string theme)
@@ -48,6 +49,16 @@ namespace Services
         public List<Article> GetAllArticle()
         {
             return _articleRepository.GetAllArticle();
+        }
+
+        public async Task<Article> GetLastArticleAsync()
+        {
+            return await _articleRepository.GetLastArticleAsync();
+        }
+
+        public async Task<List<Article>> SearchAjax(string auteur)
+        {
+           return await _articleRepository.SearchAjax(auteur);
         }
     }
 }

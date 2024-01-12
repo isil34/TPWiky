@@ -8,13 +8,41 @@
 
 @if (Model.Commentaires != null && Model.Commentaires.Any())
 {
+    
+    <table class="table table-striped table-sm table-bordered text-center">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Auteur</th>
+                <th>Contenu</th>
+                <th>Date de création</th>
+                <th>Date de modification</th>
+            </tr>
+        </thead>
+        <tbody id="Commentaires">
     @foreach (var commentaire in Model.Commentaires)
     {
         <partial name="_commentaireDetail" model="commentaire"></partial>
     }
+        </tbody>
+    </table>
 }
 else
 {
     <p>Pas de commentaires pour cet article.</p>
 }
 
+<p>Création d'un nouveau commentaire pour cet article : </p>
+
+<partial name="_addCommentaire" model="new Commentaire() {ArticleId=Model.Id}"></partial>
+
+<script>
+    $(function () {
+        $('#SupprAjax').click(function (e) {
+            $.post('/Commentaire/Delete', { idArticle: $('#ArticleId').val, idToDelete: $('#CommentaireId').val() }, function (data) {
+                $('#Commentaires').html(data);
+            });
+        })
+    });
+    
+</script>

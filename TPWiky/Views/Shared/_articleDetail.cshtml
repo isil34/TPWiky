@@ -17,7 +17,7 @@
         <tbody id="contentArticle">
 
             <tr>
-                <td>
+                <td id="ArticleId">
                     @Model.Id
                 </td>
                 <td>
@@ -40,6 +40,9 @@
                 </td>
                 <td>
                     <a asp-action="Delete" asp-route-idToDelete="@Model.Id" onclick="return confirm('Sur ???');">Supprimer</a>
+                </td>
+                <td>
+                    <a asp-action="Add" asp-route-articleId="@Model.Id" asp-controller="Commentaire">Ajouter un commentaire</a>
                 </td>
             </tr>
 

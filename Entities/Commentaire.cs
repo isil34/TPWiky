@@ -30,7 +30,7 @@ namespace Entities
 
         [ForeignKey("Article")]
         public int ArticleId { get; set; }
-        public virtual Article Article { get; set; }
+        public virtual Article? Article { get; set; }
 
     }
 }

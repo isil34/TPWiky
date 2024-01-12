@@ -3,6 +3,7 @@ using IServices;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
+using TPWiky.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,9 @@ builder.Services.AddDbContext<TPWikyContext>(o =>
     o.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=TPWiky;Integrated Security=true");
 });
 builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+builder.Services.AddTransient<ICommentaireRepository, CommentaireRepository>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<ICommentaireService, CommentaireService>();
 
 var app = builder.Build();
 
@@ -24,6 +27,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseRedirect404();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

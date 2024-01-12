@@ -1,24 +1,12 @@
 ﻿@model Commentaire
 
+<tr>
+    <td id="CommentaireId">@Model.Id</td>
+    <td>@Model.Auteur</td>
+    <td>@Model.Contenu</td>
+    <td>@Model.DateCreation</td>
+    <td>@Model.DateModification</td>
+    <td><a asp-action="Delete" asp-route-idToDelete="@Model.Id" onclick="return confirm('Sur ???');">Supprimer</a></td>
+    <td><button classe="btn btn-danger" id="SupprAjax">Supprimer Ajax</button></td>
+</tr>
 
-
-    <table class="table table-striped table-sm table-bordered text-center">
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>Auteur</th>
-                <th>Contenu</th>
-                <th>Date de création</th>
-                <th>Date de modification</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.Id</td>
-                <td>@Model.Auteur</td>
-                <td>@Model.Contenu</td>
-                <td>@Model.DateCreation</td>
-                <td>@Model.DateModification</td>
-            </tr>
-        </tbody>
-    </table>

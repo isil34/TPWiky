@@ -1,0 +1,8 @@
+﻿@model List<Commentaire>
+
+<tbody>
+    @foreach (var commentaire in Model)
+    {
+        <partial name="_commentaireDetail" model="commentaire"></partial>
+    }
+</tbody>

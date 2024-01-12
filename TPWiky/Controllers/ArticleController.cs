@@ -19,6 +19,12 @@ namespace TPWiky.Controllers
         // GET: ArticleController
         public IActionResult Index()
         {
+            return View(_articleService.GetLastArticleAsync().Result);
+        }
+
+        // GET: ArticleController/ListAll
+        public IActionResult ListeAll()
+        {
             return View(_articleService.GetAllArticle());
         }
 
@@ -29,13 +35,13 @@ namespace TPWiky.Controllers
             return View(_articleService.Detail(id));
         }
 
-        // GET: ArticleController/Create
+        // GET: ArticleController/Add
         public IActionResult Add()
         {
             return View();
         }
 
-        // POST: ArticleController/Create
+        // POST: ArticleController/Add
         [HttpPost]
         public async Task<IActionResult> Add(Article article)
         {
@@ -47,7 +53,7 @@ namespace TPWiky.Controllers
             {
                 try
                 {
-                    _articleService.AddAsync(article);
+                    await _articleService.AddAsync(article);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -73,8 +79,7 @@ namespace TPWiky.Controllers
 
             try
             {
-                var ok = await _articleService.EditAsync(article);
-                TempData["Message"] = ok ? "Message modifié" : "Message Non Modifié";
+                TempData["Message"] = await _articleService.EditAsync(article) ? "Message modifié" : "Message Non Modifié";
                 return RedirectToAction("Detail", new {Id = article.Id});
             }
             catch
@@ -99,6 +104,22 @@ namespace TPWiky.Controllers
 
         }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> SearchAjax(string auteur)
+        {
+            var messages = await _articleService.SearchAjax(auteur);
+
+            return PartialView("_displayArticles", messages);
+            //return RedirectToRoute("Detail/" + pet.Id);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllJson()
+        {
+            //return Json(await petRepository.GetAllAsync());
+            return PartialView("_displayArticles", _articleService.GetAllArticle());
+        }
+
+
     }
 }
