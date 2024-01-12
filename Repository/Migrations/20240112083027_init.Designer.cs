@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Services;
+using Repository;
 
 #nullable disable
 
-namespace Services.Migrations
+namespace Repository.Migrations
 {
-    [DbContext(typeof(TPWikyContextModelSnapshot))]
-    [Migration("20240111110912_init")]
+    [DbContext(typeof(TPWikyContext))]
+    [Migration("20240112083027_init")]
     partial class init
     {
         /// <inheritdoc />

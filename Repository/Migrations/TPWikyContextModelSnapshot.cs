@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Services;
+using Repository;
 
 #nullable disable
 
-namespace Services.Migrations
+namespace Repository.Migrations
 {
-    [DbContext(typeof(TPWikyContextModelSnapshot))]
+    [DbContext(typeof(TPWikyContext))]
     partial class TPWikyContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

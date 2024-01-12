@@ -1,0 +1,25 @@
+﻿@model Article
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+<form asp-action="Edit">
+    <input asp-for="Id" type="hidden" />
+    <label>Auteur </label>
+    <input asp-for="Auteur" type="text" />
+    <span asp-validation-for="Auteur" class="text-danger"></span>
+
+    <label>Thème</label>
+    <input asp-for="Theme" />
+    <span asp-validation-for="Theme" class="text-danger"></span>
+
+    <label>Contenu</label>
+    <input asp-for="Contenu" />
+    <span asp-validation-for="Contenu" class="text-danger"></span>
+
+    <button>Modifier</button>
+</form>

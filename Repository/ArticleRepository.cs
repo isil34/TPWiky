@@ -20,8 +20,6 @@ namespace Repository
 
         public async Task<int> AddAsync(Article article)
         {
-            article.DateModification = DateOnly.FromDateTime(DateTime.Now);
-            article.DateCreation = DateOnly.FromDateTime(DateTime.Now);
             _context.Articles.Add(article);
             return await _context.SaveChangesAsync();
         }
@@ -55,7 +53,7 @@ namespace Repository
                 var ArticleToEdit = _context.Articles.FirstOrDefault(c => c.Id == article.Id);
                 ArticleToEdit.Auteur = article.Auteur;
                 ArticleToEdit.Contenu = article.Contenu;
-                ArticleToEdit.DateModification = DateOnly.FromDateTime(DateTime.Now); ;
+                ArticleToEdit.DateModification = article.DateModification; 
                 _context.SaveChanges();
                 ok = true;
             }
@@ -78,9 +76,7 @@ namespace Repository
             bool ok;
             try
             {
-                _context.Articles.Any(a => a.Theme == theme);
-                await _context.SaveChangesAsync();
-                ok = true;
+                ok= _context.Articles.Any(a => a.Theme == theme);
             }
             catch (Exception ex)
             {

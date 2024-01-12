@@ -3,3 +3,18 @@
 <p>@TempData["Message"]</p>
 
 <partial name="_articleDetail" model="Model"></partial>
+
+<h2>Commentaires de l'article</h2>
+
+@if (Model.Commentaires != null && Model.Commentaires.Any())
+{
+    @foreach (var commentaire in Model.Commentaires)
+    {
+        <partial name="_commentaireDetail" model="commentaire"></partial>
+    }
+}
+else
+{
+    <p>Pas de commentaires pour cet article.</p>
+}
+

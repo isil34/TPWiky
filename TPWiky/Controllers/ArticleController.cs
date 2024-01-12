@@ -1,5 +1,5 @@
 ﻿using Entities;
-using IRepository;
+using IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,25 +8,25 @@ namespace TPWiky.Controllers
     public class ArticleController : Controller
     {
 
-        private IArticleRepository _articleRepository;
+        private IArticleService _articleService;
 
-        public ArticleController(IArticleRepository articleRepository)
+        public ArticleController(IArticleService articleService)
         {
-            _articleRepository = articleRepository;
+            _articleService = articleService;
         }
 
 
         // GET: ArticleController
         public IActionResult Index()
         {
-            return View(_articleRepository.GetAllArticle());
+            return View(_articleService.GetAllArticle());
         }
 
         // GET: ArticleController/Details/5
         public IActionResult Detail(int id)
         {
             // ToDo Redirect to perso 404
-            return View(_articleRepository.Detail(id));
+            return View(_articleService.Detail(id));
         }
 
         // GET: ArticleController/Create
@@ -47,7 +47,7 @@ namespace TPWiky.Controllers
             {
                 try
                 {
-                    _articleRepository.AddAsync(article);
+                    _articleService.AddAsync(article);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -61,7 +61,7 @@ namespace TPWiky.Controllers
         // GET: ArticleController/Edit/5
         public IActionResult Edit(int idToEdit)
         {
-            return View(_articleRepository.Detail(idToEdit));
+            return View(_articleService.Detail(idToEdit));
         }
 
         // POST: ArticleController/Edit/5
@@ -73,7 +73,7 @@ namespace TPWiky.Controllers
 
             try
             {
-                var ok = await _articleRepository.EditAsync(article);
+                var ok = await _articleService.EditAsync(article);
                 TempData["Message"] = ok ? "Message modifié" : "Message Non Modifié";
                 return RedirectToAction("Detail", new {Id = article.Id});
             }
@@ -86,7 +86,7 @@ namespace TPWiky.Controllers
         // GET: ArticleController/Delete/5
         public async Task<IActionResult> Delete(int idToDelete)
         {
-            bool ok = _articleRepository.DeleteAsync(idToDelete).Result;
+            bool ok = _articleService.DeleteAsync(idToDelete).Result;
             TempData["Message"] = ok ? "Message supprimée" : "Message non supprimée";
 
             return RedirectToAction("Index");
@@ -94,7 +94,7 @@ namespace TPWiky.Controllers
 
         public IActionResult CheckUniqTheme(string Theme)
         {
-            bool res =  _articleRepository.CheckUniqTheme(Theme).Result;
+            bool res =  !_articleService.CheckUniqTheme(Theme).Result;
             return Json (res);
 
         }

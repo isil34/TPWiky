@@ -1,12 +1,10 @@
-﻿@model Article
+﻿@model Commentaire
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
 
-<h1>Création d'un article</h1>
+
+<h1>Création d'un commentaire </h1>
 <p>
-    <h2>Veuillez créer votre article</h2>
+    <h2>Veuillez créer votre commentaire</h2>
     <div asp-validation-summary="All"></div>
 
 
@@ -14,10 +12,6 @@
         <label>Nom de l'auteur :</label>
         <input asp-for="Auteur">
         <span asp-validation-for="Auteur" class="text-danger"></span>
-        <br />
-        <label>Thème :</label>
-        <input asp-for="Theme">
-        <span asp-validation-for="Theme" class="text-danger"></span>
         <br />
         <label>Contenu :</label>
         <input asp-for="Contenu">
