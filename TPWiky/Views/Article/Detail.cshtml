@@ -37,12 +37,19 @@ else
 <partial name="_addCommentaire" model="new Commentaire() {ArticleId=Model.Id}"></partial>
 
 <script>
-    $(function () {
-        $('#SupprAjax').click(function (e) {
-            $.post('/Commentaire/Delete', { idArticle: $('#ArticleId').val, idToDelete: $('#CommentaireId').val() }, function (data) {
+    function SupprAjax(idCommentaire) {
+        $.ajax({
+            type: "POST",
+            url: "/Commentaire/DeleteAjax",
+            data: { idArticle: @Model.Id, idToDelete: idCommentaire },
+            success: function (data) {
+                alert("Commentaire supprimé correctement !");
                 $('#Commentaires').html(data);
-            });
-        })
-    });
+            }
+
+            
+        });
+
+    }
     
 </script>

@@ -56,7 +56,8 @@ namespace TPWiky.Controllers
             return View(_commentaireService.Detail(id));
         }
 
-        public async Task<IActionResult> Delete(int idToDelete, int idArticle)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int idToDelete, int idArticle)
         {
             bool ok = _commentaireService.DeleteAsync(idToDelete).Result;
 
