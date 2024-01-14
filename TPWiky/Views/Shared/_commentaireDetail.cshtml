@@ -6,7 +6,7 @@
     <td>@Model.Contenu</td>
     <td>@Model.DateCreation</td>
     <td>@Model.DateModification</td>
-    <td><a asp-action="Delete" asp-route-idToDelete="@Model.Id" onclick="return confirm('Sur ???');">Supprimer</a></td>
+    <td><a asp-action="Delete" asp-route-idToDelete="@Model.Id" asp-controller="Commentaire" onclick="return confirm('Sur ???');">Supprimer</a></td>
     <td><a href="#" OnClick="SupprAjax(@Model.Id);"> Suppr Ajax </a>
 </tr>
 

@@ -49,6 +49,16 @@ namespace TPWiky.Controllers
             }
         }
 
+        // GET: CommentaireController/Delete/5
+        public async Task<IActionResult> Delete(int idToDelete)
+        {
+
+            bool ok = _commentaireService.DeleteAsync(idToDelete).Result;
+            TempData["Message"] = ok ? "Message supprimée" : "Message non supprimée";
+
+            return RedirectToAction("ListeAll", "Article");
+        }
+
         // GET: CommentaireController/Details/5
         public IActionResult Detail(int id)
         {
