@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TPWikyContext>(o =>
 {
-    o.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=TPWiky;Integrated Security=true");
+    o.UseSqlServer(builder.Configuration.GetConnectionString("TPWikyDBCS"));
 });
 builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
 builder.Services.AddTransient<ICommentaireRepository, CommentaireRepository>();
